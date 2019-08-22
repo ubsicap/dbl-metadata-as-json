@@ -70,7 +70,9 @@ class MetadataAsJson():
             metadata_medium = ret["type"]["medium"]
         except:
             pass
+        """
         process_names_section(self.xml_dom, ret)
+        """
         process_manifest_section(self.xml_dom, ret)
         process_publications_section(self.xml_dom, ret)
         process_copyright_section(self.xml_dom, ret)

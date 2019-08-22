@@ -7,7 +7,9 @@ from .languages import process_languages_section
 from .countries import process_countries_section
 """
 from .type import process_type_section
+"""
 from .names import process_names_section
+"""
 from .manifest import process_manifest_section
 from .publications import process_publications_section
 from .copyright import process_copyright_section
