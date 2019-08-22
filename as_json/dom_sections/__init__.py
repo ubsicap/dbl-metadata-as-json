@@ -10,6 +10,7 @@ from .type import process_type_section
 """
 from .names import process_names_section
 from .ingredients import process_ingredients_section
+from .licenses import process_licenses_section
 """
 from .publications import process_publications_section
 from .copyright import process_copyright_section
