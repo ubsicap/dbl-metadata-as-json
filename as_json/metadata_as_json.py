@@ -79,9 +79,7 @@ class MetadataAsJson():
         """
         process_copyright_section(self.xml_dom, ret)
         process_promotion_section(self.xml_dom, ret)
-        """
-        process_archive_status_section(self.xml_dom, ret)
-        """
+        process_snapshot_section(self.xml_dom, ret)
         return ret
 
     def dom_from_dict(self):
