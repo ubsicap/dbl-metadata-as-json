@@ -1,8 +1,8 @@
 from .id_server import process_id_servers
 from .identification import process_identification_section
 from .relationships import process_relationships_section
-"""
 from .agencies import process_agencies_section
+"""
 from .language import process_language_section
 from .countries import process_countries_section
 from .type import process_type_section
