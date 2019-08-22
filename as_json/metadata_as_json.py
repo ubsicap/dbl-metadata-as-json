@@ -61,19 +61,17 @@ class MetadataAsJson():
         process_identification_section(self.xml_dom, ret)
         process_relationships_section(self.xml_dom, ret)
         process_agencies_section(self.xml_dom, ret)
-        """
-        process_language_section(self.xml_dom, ret)
+        process_languages_section(self.xml_dom, ret)
         process_countries_section(self.xml_dom, ret)
+        """
         process_type_section(self.xml_dom, ret)
         metadata_medium = None
         try:
             metadata_medium = ret["type"]["medium"]
         except:
             pass
-        process_format_section(self.xml_dom, ret, metadata_medium)
         process_names_section(self.xml_dom, ret)
         process_manifest_section(self.xml_dom, ret)
-        process_source_section(self.xml_dom, ret)
         process_publications_section(self.xml_dom, ret)
         process_copyright_section(self.xml_dom, ret)
         process_promotion_section(self.xml_dom, ret)

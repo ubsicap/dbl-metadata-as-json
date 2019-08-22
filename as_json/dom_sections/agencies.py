@@ -1,3 +1,6 @@
+from .name_like_fields import process_name_like_field
+
+
 def process_agencies_section(dom, json_dict):
     agencies_sections = dom.xpath("agencies")
     if len(agencies_sections) > 0:
@@ -8,15 +11,9 @@ def process_agencies_section(dom, json_dict):
             for field in [
                 "name"
                 ]:
-                list_elements = agency.xpath(field)
-                if len(list_elements) > 0:
-                    element_objects = {}
-                    for element in list_elements:
-                        try:
-                            element_objects[element.attrib["lang"]] = element.text
-                        except:
-                            pass
-                    agency_record[field] = element_objects
+                field_elements = process_name_like_field(agency, field)
+                if len(field_elements) > 0:
+                    agency_record[field] = field_elements
             for text_child in [
                 "isRightsHolder",
                 "id",

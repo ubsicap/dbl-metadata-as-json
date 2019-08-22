@@ -1,3 +1,5 @@
+from .name_like_fields import process_name_like_field
+
 def process_identification_section(dom, json_dict):
     identification_sections = dom.xpath("identification")
     if len(identification_sections) > 0:
@@ -7,15 +9,9 @@ def process_identification_section(dom, json_dict):
             "name",
             "abbreviation",
             "description"]:
-            list_elements = identification_section.xpath(field)
-            if len(list_elements) > 0:
-                element_objects = {}
-                for element in list_elements:
-                    try:
-                        element_objects[element.attrib["lang"]] = element.text
-                    except:
-                        pass
-                json_dict["identification"][field] = element_objects
+                field_elements = process_name_like_field(identification_section, field)
+                if len(field_elements) > 0:
+                    json_dict["identification"][field] = field_elements
         for field in [
             'dateStarted',
             'dateCompleted'
