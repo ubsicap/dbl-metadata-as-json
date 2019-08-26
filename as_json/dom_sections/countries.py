@@ -1,3 +1,4 @@
+from lxml import etree
 from .name_like_fields import process_name_like_field
 
 

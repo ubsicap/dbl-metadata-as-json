@@ -74,9 +74,7 @@ class MetadataAsJson():
         process_names_section(self.xml_dom, ret)
         process_ingredients_section(self.xml_dom, ret)
         process_licenses_section(self.xml_dom, ret)
-        """
         process_publications_section(self.xml_dom, ret)
-        """
         process_copyright_section(self.xml_dom, ret)
         process_promotion_section(self.xml_dom, ret)
         process_snapshot_section(self.xml_dom, ret)

@@ -15,11 +15,9 @@ def process_division(dom, json_array):
     dom is for division, json_array is for parent.
     """
     division_object = {}
-    if "name" in dom.attrib:
-        division_name = dom.attrib["name"]
-        json_array += [{"name": division_name}]
-        if "role" in dom.attrib:
-            json_array[-1]["role"] = dom.attrib["role"]
+    if "nameId" in dom.attrib:
+        division_name = dom.attrib["nameId"]
+        json_array += [{"nameId": division_name}]
         children = dom.xpath("*[name()='content' or name()='division']")
         if len(children) > 0:
             json_array[-1]["contains"] = []
@@ -38,6 +36,6 @@ def process_resource(dom, json_array):
     if "src" in dom.attrib:
         resource_src = dom.attrib["src"]
         json_array += [{"src": resource_src}]
-        for att in ["role", "name", "srcPart"]:
+        for att in ["role", "nameId"]:
             if att in dom.attrib:
                 json_array[-1][att] = dom.attrib[att]
