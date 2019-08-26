@@ -7,13 +7,20 @@ import sys
 sys.path.append(os.path.join(__file__, "..", ".."))
 from as_json.metadata_as_json import MetadataAsJson
 
+
 @pytest.mark.parametrize(
     "xml_filename",
     [
         "scripture_text.xml",
         "scripture_audio.xml",
         "scripture_sign_language.xml",
-        "scripture_print_pdf.xml"
+        "scripture_print_pdf.xml",
+        "scripture_print_ttt.xml",
+        "scripture_braille.xml",
+        "scripture_x.xml",
+        "glossed_text_story.xml",
+        "parascriptural_word_alignment.xml",
+        "peripheral_versification.xml"
     ]
 )
 def test_valid_xml_to_json(xml_filename):

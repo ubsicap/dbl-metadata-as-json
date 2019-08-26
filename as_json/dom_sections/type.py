@@ -1,5 +1,9 @@
 from .canon_spec import process_canon_spec
 from .scope import process_scope
+from .scripture_type import *
+from .gloss_type import *
+from .parascriptural_type import *
+from .peripheral_type import *
 
 
 def process_type_section(dom, json_dict):
@@ -38,9 +42,9 @@ def process_type_section(dom, json_dict):
                         flavor_details_sections[0],
                         json_dict["type"]["flavorDetails"]
                     )
-                elif json_dict["type"]["flavorType"] in flavors and\
-                    json_dict["type"]["flavor"] in flavors[json_dict["type"]["flavorType"]]:
-                    flavors[json_dict["type"]["flavorType"]][json_dict["type"]["flavor"]](
+                elif json_dict["type"]["flavorType"] in flavor_detail_processors and\
+                    json_dict["type"]["flavor"] in flavor_detail_processors[json_dict["type"]["flavorType"]]:
+                    flavor_detail_processors[json_dict["type"]["flavorType"]][json_dict["type"]["flavor"]](
                         flavor_details_sections[0],
                         json_dict["type"]["flavorDetails"]
                     )
@@ -79,19 +83,21 @@ def process_x_type1(dom, json_dict):
         json_dict["text"] = dom.text
 
 
-flavors = {
+flavor_detail_processors = {
     "scripture" : {
-        "scriptureText": process_x_type,
-        "scriptureAudio": process_x_type,
-        "scriptureVideo": process_x_type,
-        "scripturePrint": process_x_type,
-        "scriptureBraille": process_x_type
-
+        "scriptureText": process_scripture_text_type,
+        "scriptureAudio": process_scripture_audio_type,
+        "scriptureSignLanguageVideo": process_scripture_sign_language_type,
+        "scripturePrint": process_scripture_print_type,
+        "scriptureBraille": process_scripture_braille_type
     },
     "gloss": {
+        "glossedTextStory": process_glossed_text_story_type
     },
     "parascriptural": {
+        "parascripturalWordAlignment": process_parascriptural_word_alignment_type
     },
     "peripheral": {
+        "peripheralVersification": process_peripheral_versification_type
     }
 }
