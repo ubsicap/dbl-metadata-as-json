@@ -9,4 +9,12 @@ def process_canon_spec(dom, json_dict):
         if len(components) > 0:
             json_dict["canonSpec"]["components"] = []
             for component in components:
-                json_dict["canonSpec"]["components"] += [str(component.attrib["name"])]
+                component_books = component.xpath("book")
+                component_name = str(component.attrib["name"])
+                component = {"name": component_name}
+                if len(component_books) > 0:
+                    component["books"] = []
+                    for book in component_books:
+                        if book.text:
+                            component["books"].append(book.text)
+                json_dict["canonSpec"]["components"].append(component)

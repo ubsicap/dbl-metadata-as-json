@@ -23,11 +23,11 @@
             <publications>restricted</publications>
             <source>private</source>
         </confidentiality>
+        <conventions>
+            <convention version="1.0">edibleDyes</convention>
+        </conventions>
         <flavorDetails>
-            <colorModel>stephaniesFeltTips</colorModel>
-            <conventions>
-                <convention version="1.0">edibleDyes</convention>
-            </conventions>
+            <colorModel mode="rgb">stephaniesFeltTips</colorModel>
         </flavorDetails>
     </type>
     <licenses>
