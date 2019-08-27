@@ -176,19 +176,132 @@ def process_scripture_braille_type(dom, json_dict):
 
 
 def process_braille_convertor(dom, json_dict):
-    pass
+    convertor_sections = dom.xpath("brailleConvertor")
+    if len(convertor_sections) > 0:
+        json_dict["brailleConvertor"] = {}
+        for string_field in [
+            "version"
+        ]:
+            field_nodes = convertor_sections[0].xpath(string_field)
+            if len(field_nodes) > 0:
+                json_dict["brailleConvertor"][string_field] = str(field_nodes[0].text)
+        table_sections = convertor_sections[0].xpath("table")
+        if len(table_sections) > 0:
+            json_dict["brailleConvertor"]["table"] = {}
+            for string_field in [
+                "src",
+                "name"
+            ]:
+                field_nodes = table_sections[0].xpath(string_field)
+                if len(field_nodes) > 0:
+                    json_dict["brailleConvertor"]["table"][string_field] = str(field_nodes[0].text)
+
 
 def process_hyphenation_dictionary_convertor(dom, json_dict):
-    pass
+    hyphenation_sections = dom.xpath("hyphenationDictionary")
+    if len(hyphenation_sections) > 0:
+        json_dict["hyphenationDictionary"] = {}
+        if "src" in hyphenation_sections[0].attrib:
+            json_dict["hyphenationDictionary"]["src"] = hyphenation_sections[0].attrib["src"]
+        for string_field in [
+            "name"
+        ]:
+            field_nodes = hyphenation_sections[0].xpath(string_field)
+            if len(field_nodes) > 0:
+                json_dict["hyphenationDictionary"][string_field] = str(field_nodes[0].text)
+
 
 def process_continuous_poetry_convertor(dom, json_dict):
-    pass
+    poetry_sections = dom.xpath("continuousPoetry")
+    if len(poetry_sections) > 0:
+        json_dict["continuousPoetry"] = {}
+        for string_field in [
+            "startIndicator",
+            "lineIndicator",
+            "lineIndicatorSpaced",
+            "endIndicator"
+        ]:
+            field_nodes = poetry_sections[0].xpath(string_field)
+            if len(field_nodes) > 0:
+                json_dict["continuousPoetry"][string_field] = str(field_nodes[0].text)
+
 
 def process_braille_number_sign(dom, json_dict):
-    pass
+    sign_sections = dom.xpath("numberSign")
+    if len(sign_sections) > 0:
+        json_dict["numberSign"] = {}
+        for string_field in [
+            "character"
+        ]:
+            field_nodes = sign_sections[0].xpath(string_field)
+            if len(field_nodes) > 0:
+                json_dict["numberSign"][string_field] = str(field_nodes[0].text)
+        for bool_field in [
+            "useInMargin"
+        ]:
+            field_nodes = sign_sections[0].xpath(bool_field)
+            if len(field_nodes) > 0:
+                json_dict["numberSign"][bool_field] = field_nodes[0].text == "true"
+
 
 def process_braille_content(dom, json_dict):
-    pass
+    content_sections = dom.xpath("content")
+    if len(content_sections) > 0:
+        json_dict["content"] = {}
+        for string_field in [
+            "chapterNumberStyle",
+            "verseSeparator"
+        ]:
+            field_nodes = content_sections[0].xpath(string_field)
+            if len(field_nodes) > 0:
+                json_dict["content"][string_field] = str(field_nodes[0].text)
+        for bool_field in [
+            "chapterHeadingsNumberFirst",
+            "includeIntros"
+        ]:
+            field_nodes = content_sections[0].xpath(bool_field)
+            if len(field_nodes) > 0:
+                json_dict["content"][bool_field] = field_nodes[0].text == "true"
+        versed_sections = content_sections[0].xpath("versedParagraphs")
+        if len(versed_sections) > 0:
+            json_dict["versedParagraphs"] = []
+            for versed_book in versed_sections[0].xpath("book"):
+                try:
+                    json_dict["versedParagraphs"].append(versed_book.text)
+                except:
+                    pass
+        for extra_section in content_sections[0].xpath("footnotes|crossReferences|characterStyles"):
+            json_dict["content"][extra_section.tag] = {}
+            for string_field in [
+                "callerSymbol",
+                "emphasizedWord",
+                "emphasizedPassageStart",
+                "emphasizedPassageEnd"
+            ]:
+                field_nodes = extra_section.xpath(string_field)
+                if len(field_nodes) > 0:
+                    json_dict["content"][extra_section.tag][string_field] = str(field_nodes[0].text)
+            
 
 def process_braille_page(dom, json_dict):
-    pass
+    page_sections = dom.xpath("page")
+    if len(page_sections) > 0:
+        json_dict["page"] = {}
+        for integer_field in [
+            "charsPerLine",
+            "linesPerPage",
+            "defaultMarginWidth",
+            "carryLines"
+        ]:
+            field_nodes = page_sections[0].xpath(integer_field)
+            if len(field_nodes) > 0:
+                try:
+                    json_dict["page"][integer_field] = int(field_nodes[0].text)
+                except:
+                    pass
+        for bool_field in [
+            "versoLastLineBlank"
+        ]:
+            field_nodes = page_sections[0].xpath(bool_field)
+            if len(field_nodes) > 0:
+                json_dict["page"][bool_field] = field_nodes[0].text == "true"

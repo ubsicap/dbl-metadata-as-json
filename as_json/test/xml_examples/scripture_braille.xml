@@ -64,10 +64,16 @@
             </table>
             <version>3.7.0</version>
          </brailleConvertor>
+         <hyphenationDictionary src="foo">
+            <name>foo.txt</name>
+         </hyphenationDictionary>
          <numberSign>
             <character>⠼</character>
             <useInMargin>false</useInMargin>
          </numberSign>
+         <continuousPoetry>
+            <lineIndicatorSpaced>never</lineIndicatorSpaced>
+         </continuousPoetry>
          <content>
             <chapterNumberStyle>upper</chapterNumberStyle>
             <chapterHeadingsNumberFirst>false</chapterHeadingsNumberFirst>
@@ -76,6 +82,9 @@
             </versedParagraphs>
             <verseSeparator>⠀⠀</verseSeparator>
             <includeIntros>false</includeIntros>
+            <footnotes>
+               <callerSymbol>⠼</callerSymbol>
+            </footnotes>
          </content>
          <page>
             <charsPerLine>36</charsPerLine>
